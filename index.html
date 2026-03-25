@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>홍대 가라오케 추천 업소 BEST 정리</title>
+  <style>
+    :root {
+      --bg: #f3fff7;
+      --bg-soft: #f7fffa;
+      --primary: #bdf5d3;
+      --primary-strong: #6edfa3;
+      --text: #1f3a2d;
+      --subtext: #4f7a66;
+      --card: rgba(255, 255, 255, 0.88);
+      --border: rgba(110, 223, 163, 0.25);
+      --shadow: 0 20px 50px rgba(80, 160, 120, 0.15);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(189, 245, 211, 0.6), transparent 28%),
+        radial-gradient(circle at top right, rgba(214, 255, 235, 0.7), transparent 24%),
+        linear-gradient(180deg, #f3fff7 0%, #e9fff3 100%);
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #d8ffe9 0%, #bdf5d3 50%, #a5efc7 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 70px;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+      filter: blur(2px);
+    }
+
+    header::before {
+      width: 280px;
+      height: 280px;
+      top: -80px;
+      right: -50px;
+    }
+
+    header::after {
+      width: 220px;
+      height: 220px;
+      bottom: -70px;
+      left: -40px;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      color: #5c4788;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 17px;
+      color: #4b3f65;
+      max-width: 760px;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 18px 40px rgba(111, 84, 170, 0.13);
+    }
+
+    .hero-card h3 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-card li {
+      background: rgba(248, 244, 255, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: #55486f;
+    }
+
+    main {
+      padding: 42px 0 80px;
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .quick-nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(216, 200, 255, 0.24);
+      border: 1px solid rgba(183, 156, 255, 0.22);
+      color: #5d4b82;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .quick-nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(216, 200, 255, 0.42);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .card h3 {
+      margin: 26px 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: var(--subtext);
+      font-size: 16px;
+    }
+
+    .feature-list,
+    .check-list,
+    .step-list,
+    .tips-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .feature-item,
+    .check-item,
+    .step-item,
+    .tip-item {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(235,255,245,0.98));
+      border: 1px solid rgba(183, 156, 255, 0.18);
+    }
+
+    .feature-item strong,
+    .check-item strong,
+    .step-item strong,
+    .tip-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #3a2e55;
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: #e6fff1;
+      color: #604e86;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid rgba(183, 156, 255, 0.2);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(189,245,211,0.55), rgba(230,255,240,0.9));
+      border-radius: 22px;
+      padding: 24px;
+      border: 1px solid rgba(183, 156, 255, 0.22);
+    }
+
+    .highlight-box p:last-child,
+    .feature-item p:last-child,
+    .check-item p:last-child,
+    .step-item p:last-child,
+    .tip-item p:last-child,
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .full-width {
+      margin-top: 24px;
+    }
+
+    footer {
+      padding: 30px 0 60px;
+      color: #7a6e96;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding-top: 72px;
+      }
+
+      .hero-card {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .card,
+      .hero-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+      }
+
+      .quick-nav {
+        gap: 10px;
+      }
+
+      .quick-nav a {
+        font-size: 14px;
+        padding: 9px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container hero">
+      <div>
+        <div class="eyebrow">홍대 지역 추천 가이드</div>
+        <h1>홍대 가라오케 추천 업소 BEST 정리</h1>
+        <p>
+          서울에서 젊은 분위기와 자유로운 문화를 느낄 수 있는 대표적인 지역이 바로 홍대입니다.
+          홍익대학교 주변을 중심으로 다양한 카페, 술집, 클럽, 공연 문화가 형성되어 있어
+          낮과 밤 모두 활발한 분위기를 가지고 있는 지역입니다.
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <h3>핵심 포인트</h3>
+        <ul>
+          <li>홍대입구역 중심 접근성</li>
+          <li>자유롭고 캐주얼한 분위기</li>
+          <li>코인 노래방 · 일반 노래방 · 룸형 가라오케 선택 가능</li>
+          <li>늦은 시간까지 활발한 상권</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav class="quick-nav">
+        <a href="#intro">지역 소개</a>
+        <a href="#feature">특징</a>
+        <a href="#method">찾는 방법</a>
+        <a href="#caution">주의할 점</a>
+        <a href="#tips">선택 팁</a>
+      </nav>
+
+      <section class="grid">
+        <article class="card" id="intro">
+          <h2>홍대 지역 분위기</h2>
+          <p>
+            홍대는 대학가 중심 상권으로 다양한 문화와 여가 공간이 함께 형성된 지역입니다.
+            낮과 밤 모두 유동 인구가 많으며 자유로운 분위기가 특징입니다.
+          </p>
+          <p>
+            가라오케 역시 친구들과 가볍게 즐기거나 2차, 3차로 방문하기 좋은 공간으로
+            부담 없이 이용할 수 있는 환경이 형성되어 있습니다.
+          </p>
+
+          <div class="badge-row">
+            <span class="badge">홍대입구 중심</span>
+            <span class="badge">자유로운 분위기</span>
+            <span class="badge">야간 상권 활성</span>
+          </div>
+        </article>
+
+        <aside class="card">
+          <div class="highlight-box">
+            <h2 style="margin-top:0;">강남에서 찾을 때 핵심</h2>
+            <p>
+              강남은 지역이 넓고 분위기 차이도 있는 편이기 때문에,
+              먼저 강남역 · 신논현 · 논현 · 역삼처럼 동선을 기준으로 범위를 좁히는 것이 좋습니다.
+            </p>
+            <p>
+              이후 위치, 룸 상태, 운영 방식, 방문 시간대를 함께 비교하면
+              자신에게 맞는 업소를 찾는 데 도움이 됩니다.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="card" id="feature">
+        <h2>홍대 가라오케 특징</h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>자유로운 분위기</strong>
+            <p>
+              홍대는 대학가 중심 상권으로 전체적으로 편하고 자유로운 분위기가 형성되어 있습니다.
+              <a href="https://www.mtloona.com/hongdae">홍대 가라오케</a> 역시 부담 없이 방문할 수 있는 공간이 많은 편입니다.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <strong>다양한 가격대와 형태</strong>
+            <p>
+              코인 노래방, 일반 노래방, 룸 형태 가라오케 등 다양한 형태가 있어
+              상황과 목적에 따라 선택할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <strong>늦은 시간까지 활발한 상권</strong>
+            <p>
+              홍대는 밤 늦게까지 유동 인구가 많은 지역으로
+              늦은 시간에도 가라오케 이용이 가능한 경우가 많습니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid full-width">
+        <article class="card">
+          <h2>홍대 가라오케 추천 지역 BEST</h2>
+          <div class="check-list">
+            <div class="check-item">
+              <strong>홍대입구역 중심 상권</strong>
+              <p>
+                가장 많은 사람들이 모이는 중심 지역으로 다양한 술집과 노래 공간이 밀집되어 있습니다.
+              </p>
+              <p>특징: 접근성 우수 · 업소 밀집 · 이동 편리</p>
+            </div>
+
+            <div class="check-item">
+              <strong>상수 / 합정 라인</strong>
+              <p>
+                메인 거리보다 여유로운 분위기를 가진 지역으로 카페와 바 중심 상권이 형성되어 있습니다.
+              </p>
+              <p>특징: 조용한 분위기 · 소규모 모임 적합 · 감성적인 분위기</p>
+            </div>
+
+            <div class="check-item">
+              <strong>연남동 인근</strong>
+              <p>
+                트렌디한 상권으로 다양한 음식점과 카페가 밀집되어 있으며 가볍게 즐기기 좋은 지역입니다.
+              </p>
+              <p>특징: 트렌디 · 여유로운 분위기 · 먹거리 다양</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>홍대 가라오케 추천 업소 유형</h2>
+          <div class="step-list">
+            <div class="step-item">
+              <strong>코인 노래방</strong>
+              <p>짧은 시간 간단하게 이용하기 좋으며 혼자 또는 소규모 방문에 적합합니다.</p>
+            </div>
+            <div class="step-item">
+              <strong>일반 노래방</strong>
+              <p>가장 기본적인 형태로 친구들과 부담 없이 이용하기 좋습니다.</p>
+            </div>
+            <div class="step-item">
+              <strong>룸 형태 가라오케</strong>
+              <p>프라이빗한 공간에서 시간을 보내고 싶은 경우 선택됩니다.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="card" id="tips">
+        <h2>홍대 가라오케 이용 팁</h2>
+        <div class="tips-list">
+          <div class="tip-item">
+            <strong>위치 중심 선택</strong>
+            <p>홍대입구역 근처를 기준으로 찾으면 이동이 편합니다.</p>
+          </div>
+          <div class="tip-item">
+            <strong>시간대 고려</strong>
+            <p>늦은 시간에는 이용객이 많아질 수 있습니다.</p>
+          </div>
+          <div class="tip-item">
+            <strong>인원 확인</strong>
+            <p>룸 이용 시 인원에 맞는 공간을 선택하는 것이 중요합니다.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    홍대 가라오케 추천 업소와 지역 특징을 정리한 안내 페이지입니다.
+  </footer>
+</body>
+</html>
